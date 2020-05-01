@@ -1,17 +1,14 @@
 import socket
-
-soc = socket.socket()
-
-soc.bind(('', 9090))
-soc.listen(1)
-
-conn, addr = soc.accept()
-
-while True:
-    data = conn.recv(1024).decode()
-    if not data:
-        break
-    print(data)
-
-conn.close()
-
+sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+sock.bind (('localhost',5050))
+client = [] # Массив где храним адреса клиентов
+print ('Start Server')
+while 1 :
+         data , addres = sock.recvfrom(1024)
+         print (addres[0], addres[1])
+         if  addres not in client : 
+                 client.append(addres)# Если такова клиента нету , то добавить
+         for clients in client :
+                 if clients == addres : 
+                     continue # Не отправлять данные клиенту который их прислал
+                 sock.sendto(data,clients)
