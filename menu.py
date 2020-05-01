@@ -26,6 +26,7 @@ class Menu:
     def author(self):
         print("Автор: Волков Юрий")
         print("Группа: 1291-23")
+        print("ООО Помоги больному человеку")
 
     def quantitywin(self, session):
         print("Количество выйгрышей - {}".format(session.win))
